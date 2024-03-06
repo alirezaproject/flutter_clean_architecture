@@ -1,30 +1,16 @@
-import 'dart:convert';
-
 class Coord {
   double? lon;
   double? lat;
 
   Coord({this.lon, this.lat});
 
-  factory Coord.fromMap(Map<String, dynamic> data) => Coord(
-        lon: (data['lon'] as num?)?.toDouble(),
-        lat: (data['lat'] as num?)?.toDouble(),
+  factory Coord.fromJson(Map<String, dynamic> json) => Coord(
+        lon: (json['lon'] as num?)?.toDouble(),
+        lat: (json['lat'] as num?)?.toDouble(),
       );
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toJson() => {
         'lon': lon,
         'lat': lat,
       };
-
-  /// `dart:convert`
-  ///
-  /// Parses the string and returns the resulting Json object as [Coord].
-  factory Coord.fromJson(String data) {
-    return Coord.fromMap(json.decode(data) as Map<String, dynamic>);
-  }
-
-  /// `dart:convert`
-  ///
-  /// Converts [Coord] to a JSON string.
-  String toJson() => json.encode(toMap());
 }

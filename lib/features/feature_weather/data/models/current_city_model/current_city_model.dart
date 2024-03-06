@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_clean_architecture/features/feature_weather/domain/entities/current_city_entity.dart';
 
 import 'clouds.dart';
@@ -10,7 +8,6 @@ import 'sys.dart';
 import 'weather.dart';
 import 'wind.dart';
 
-// ignore: must_be_immutable
 class CurrentCityModel extends CurrentCityEntity {
   Coord? coord;
   List<Weather>? weather;
@@ -28,67 +25,69 @@ class CurrentCityModel extends CurrentCityEntity {
   int? cod;
 
   CurrentCityModel({
-    super.coord,
-    super.weather,
-    super.base,
-    super.main,
-    super.visibility,
-    super.wind,
-    super.rain,
-    super.clouds,
-    super.dt,
-    super.sys,
-    super.timezone,
-    super.id,
-    super.name,
-    super.cod,
-  });
+    this.coord,
+    this.weather,
+    this.base,
+    this.main,
+    this.visibility,
+    this.wind,
+    this.rain,
+    this.clouds,
+    this.dt,
+    this.sys,
+    this.timezone,
+    this.id,
+    this.name,
+    this.cod,
+  }) : super(
+            coord: coord,
+            weather: weather,
+            base: base,
+            main: main,
+            visibility: visibility,
+            wind: wind,
+            rain: rain,
+            clouds: clouds,
+            dt: dt,
+            sys: sys,
+            timezone: timezone,
+            id: id,
+            name: name,
+            cod: cod);
 
-  factory CurrentCityModel.fromMap(Map<String, dynamic> data) {
+  factory CurrentCityModel.fromJson(Map<String, dynamic> json) {
     return CurrentCityModel(
-      coord: data['coord'] == null ? null : Coord.fromMap(data['coord'] as Map<String, dynamic>),
-      weather: (data['weather'] as List<dynamic>?)?.map((e) => Weather.fromMap(e as Map<String, dynamic>)).toList(),
-      base: data['base'] as String?,
-      main: data['main'] == null ? null : Main.fromMap(data['main'] as Map<String, dynamic>),
-      visibility: data['visibility'] as int?,
-      wind: data['wind'] == null ? null : Wind.fromMap(data['wind'] as Map<String, dynamic>),
-      rain: data['rain'] == null ? null : Rain.fromMap(data['rain'] as Map<String, dynamic>),
-      clouds: data['clouds'] == null ? null : Clouds.fromMap(data['clouds'] as Map<String, dynamic>),
-      dt: data['dt'] as int?,
-      sys: data['sys'] == null ? null : Sys.fromMap(data['sys'] as Map<String, dynamic>),
-      timezone: data['timezone'] as int?,
-      id: data['id'] as int?,
-      name: data['name'] as String?,
-      cod: data['cod'] as int?,
+      coord: json['coord'] == null ? null : Coord.fromJson(json['coord'] as Map<String, dynamic>),
+      weather: (json['weather'] as List<dynamic>?)?.map((e) => Weather.fromJson(e as Map<String, dynamic>)).toList(),
+      base: json['base'] as String?,
+      main: json['main'] == null ? null : Main.fromJson(json['main'] as Map<String, dynamic>),
+      visibility: json['visibility'] as int?,
+      wind: json['wind'] == null ? null : Wind.fromJson(json['wind'] as Map<String, dynamic>),
+      rain: json['rain'] == null ? null : Rain.fromJson(json['rain'] as Map<String, dynamic>),
+      clouds: json['clouds'] == null ? null : Clouds.fromJson(json['clouds'] as Map<String, dynamic>),
+      dt: json['dt'] as int?,
+      sys: json['sys'] == null ? null : Sys.fromJson(json['sys'] as Map<String, dynamic>),
+      timezone: json['timezone'] as int?,
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+      cod: json['cod'] as int?,
     );
   }
 
-  Map<String, dynamic> toMap() => {
-        'coord': coord?.toMap(),
-        'weather': weather?.map((e) => e.toMap()).toList(),
+  Map<String, dynamic> toJson() => {
+        'coord': coord?.toJson(),
+        'weather': weather?.map((e) => e.toJson()).toList(),
         'base': base,
-        'main': main?.toMap(),
+        'main': main?.toJson(),
         'visibility': visibility,
-        'wind': wind?.toMap(),
-        'rain': rain?.toMap(),
-        'clouds': clouds?.toMap(),
+        'wind': wind?.toJson(),
+        'rain': rain?.toJson(),
+        'clouds': clouds?.toJson(),
         'dt': dt,
-        'sys': sys?.toMap(),
+        'sys': sys?.toJson(),
         'timezone': timezone,
         'id': id,
         'name': name,
         'cod': cod,
       };
-
-  /// `dart:convert`
-  ///
-  /// Parses the string and returns the resulting Json object as [CurrentCityModel].
-  factory CurrentCityModel.fromJson(String data) {
-    return CurrentCityModel.fromMap(json.decode(data) as Map<String, dynamic>);
-  }
-
-  /// `dart:convert`
-  ///
-  /// Converts [CurrentCityModel] to a JSON string.
-  String toJson() => json.encode(toMap());
 }

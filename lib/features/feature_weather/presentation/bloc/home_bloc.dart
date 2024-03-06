@@ -11,7 +11,8 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetCurrentWeatherUseCase getCurrentWeatherUseCase;
 
-  HomeBloc(this.getCurrentWeatherUseCase) : super(HomeState(currentWeatherStatus: CurrentWeatherLoading())) {
+  HomeBloc(this.getCurrentWeatherUseCase)
+      : super(HomeState(currentWeatherStatus: CurrentWeatherLoading())) {
     on<LoadCurrentWeatherEvent>((event, emit) async {
       emit(state.copyWith(CurrentWeatherLoading()));
 

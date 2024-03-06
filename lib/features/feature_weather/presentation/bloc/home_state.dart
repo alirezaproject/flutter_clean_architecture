@@ -9,6 +9,7 @@ class HomeState extends Equatable {
   List<Object?> get props => [currentWeatherStatus];
 
   HomeState copyWith(CurrentWeatherStatus? newCurrentWeatherStatus) {
-    return HomeState(currentWeatherStatus: newCurrentWeatherStatus ?? currentWeatherStatus);
+    return HomeState(
+        currentWeatherStatus: newCurrentWeatherStatus ?? currentWeatherStatus);
   }
 }

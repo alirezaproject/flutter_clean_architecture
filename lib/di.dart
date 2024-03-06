@@ -5,17 +5,18 @@ import 'package:flutter_clean_architecture/features/feature_weather/domain/use_c
 import 'package:flutter_clean_architecture/features/feature_weather/presentation/bloc/home_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-final getIt = GetIt.instance;
+final di = GetIt.instance;
 
 configureDependencies() {
-  getIt.registerSingleton<ApiProvider>(ApiProvider());
+  di.registerSingleton<ApiProvider>(ApiProvider());
 
   /// repositories
-  getIt.registerSingleton<WeatherRepo>(WeatherRepoImpl(getIt()));
+  di.registerSingleton<WeatherRepo>(WeatherRepoImpl(di()));
 
   /// use case
-  getIt.registerSingleton<GetCurrentWeatherUseCase>(GetCurrentWeatherUseCase(getIt()));
+  di.registerSingleton<GetCurrentWeatherUseCase>(
+      GetCurrentWeatherUseCase(di()));
 
   /// bloc
-  getIt.registerSingleton<HomeBloc>(HomeBloc(getIt()));
+  di.registerSingleton<HomeBloc>(HomeBloc(di()));
 }

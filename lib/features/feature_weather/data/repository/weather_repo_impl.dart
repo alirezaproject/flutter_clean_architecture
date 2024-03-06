@@ -10,11 +10,13 @@ class WeatherRepoImpl implements WeatherRepo {
   ApiProvider api;
   WeatherRepoImpl(this.api);
   @override
-  Future<DataState<CurrentCityEntity>> fetchCurrentWeatherData(String cityName) async {
+  Future<DataState<CurrentCityEntity>> fetchCurrentWeatherData(
+      String cityName) async {
     try {
       Response response = await api.callCurrentWeather(cityName);
       if (response.statusCode == 200) {
-        CurrentCityEntity currentCityEntity = CurrentCityModel.fromJson(response.data);
+        CurrentCityEntity currentCityEntity =
+            CurrentCityModel.fromJson(response.data);
         return DataSuccess(currentCityEntity);
       } else {
         return DataFailed('something went wrong, try again ...');

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Sys {
   int? type;
   int? id;
@@ -9,31 +7,19 @@ class Sys {
 
   Sys({this.type, this.id, this.country, this.sunrise, this.sunset});
 
-  factory Sys.fromMap(Map<String, dynamic> data) => Sys(
-        type: data['type'] as int?,
-        id: data['id'] as int?,
-        country: data['country'] as String?,
-        sunrise: data['sunrise'] as int?,
-        sunset: data['sunset'] as int?,
+  factory Sys.fromJson(Map<String, dynamic> json) => Sys(
+        type: json['type'] as int?,
+        id: json['id'] as int?,
+        country: json['country'] as String?,
+        sunrise: json['sunrise'] as int?,
+        sunset: json['sunset'] as int?,
       );
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toJson() => {
         'type': type,
         'id': id,
         'country': country,
         'sunrise': sunrise,
         'sunset': sunset,
       };
-
-  /// `dart:convert`
-  ///
-  /// Parses the string and returns the resulting Json object as [Sys].
-  factory Sys.fromJson(String data) {
-    return Sys.fromMap(json.decode(data) as Map<String, dynamic>);
-  }
-
-  /// `dart:convert`
-  ///
-  /// Converts [Sys] to a JSON string.
-  String toJson() => json.encode(toMap());
 }
